@@ -316,7 +316,7 @@ describe "lib/screenshots", ->
         buffer: dataUriToBuffer(image)
         takenAt: "1234-date"
       }
-      
+
       dimensions = sizeOf(details.buffer)
       screenshots.save(
         { name: "with-buffer", specName: "foo.spec.js", testFailure: false },
@@ -327,9 +327,9 @@ describe "lib/screenshots", ->
         expectedPath = path.join(
           @config.screenshotsFolder, "foo.spec.js", "with-buffer.png"
         )
-        
+
         actualPath = path.normalize(result.path)
-        
+
         expect(result).to.deep.eq({
           dimensions
           name: "with-buffer"
@@ -341,7 +341,7 @@ describe "lib/screenshots", ->
           testFailure: false
           takenAt: "1234-date"
         })
-        
+
         expect(expectedPath).to.eq(actualPath)
 
         fs.statAsync(expectedPath)
@@ -366,14 +366,14 @@ describe "lib/screenshots", ->
       expect(p).to.eq(
         "path/to/screenshots/examples$/user/list.js/quux/lorem.png"
       )
-      
+
       p2 = screenshots.getPath({
         specName: "examples$/user/list.js"
         titles: ["bar", "baz"]
         name: "quux*"
         takenPaths: ["path/to/screenshots/examples$/user/list.js/quux.png"]
       }, "png", "path/to/screenshots")
-      
+
       expect(p2).to.eq(
         "path/to/screenshots/examples$/user/list.js/quux (1).png"
       )
@@ -389,13 +389,13 @@ describe "lib/screenshots", ->
       expect(p).to.eq(
         "path/to/screenshots/examples$/user/list.js/bar -- baz (failed).png"
       )
-      
+
       p2 = screenshots.getPath({
         specName: "examples$/user/list.js"
         titles: ["bar", "baz^"]
         takenPaths: ["path/to/screenshots/examples$/user/list.js/bar -- baz.png"]
       }, "png", "path/to/screenshots")
-      
+
       expect(p2).to.eq(
         "path/to/screenshots/examples$/user/list.js/bar -- baz (1).png"
       )
